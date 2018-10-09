@@ -1,14 +1,13 @@
-FROM alpine:latest
+FROM mfrancis95/chocolate-doom-build
 
-RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    apk update && \
-    apk add autoconf automake build-base git sdl2-dev sdl2_mixer-dev sdl2_net-dev && \
-    git clone https://github.com/fabiangreffrath/crispy-doom
+RUN git clone https://github.com/fabiangreffrath/crispy-doom
 
 WORKDIR crispy-doom
 
-RUN ./autogen.sh && make
+RUN ./autogen.sh && make install
 
-EXPOSE 2342/udp
+FROM mfrancis95/chocolate-doom-base
 
-ENTRYPOINT src/crispy-doom -dedicated -privateserver
+COPY --from=0 /usr/local/bin/crispy-doom /usr/local/bin/crispy-doom
+
+ENTRYPOINT crispy-doom -dedicated -privateserver
