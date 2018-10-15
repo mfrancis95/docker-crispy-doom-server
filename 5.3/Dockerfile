@@ -1,10 +1,10 @@
 FROM mfrancis95/chocolate-doom-build
 
-RUN git clone https://github.com/fabiangreffrath/crispy-doom
+RUN git clone -b crispy-doom-5.3 https://github.com/fabiangreffrath/crispy-doom
 
 WORKDIR crispy-doom
 
-RUN git reset --hard 400669a && ./autogen.sh && make install
+RUN ./autogen.sh && make install
 
 FROM mfrancis95/chocolate-doom-base
 
