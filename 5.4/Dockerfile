@@ -1,6 +1,6 @@
 FROM mfrancis95/chocolate-doom-build
 
-RUN git clone -b crispy-doom-5.3 https://github.com/fabiangreffrath/crispy-doom
+RUN git clone -b crispy-doom-5.4 https://github.com/fabiangreffrath/crispy-doom
 
 WORKDIR crispy-doom
 
